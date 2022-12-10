@@ -1,0 +1,11 @@
+[Sat Dec 10 06:00:17.928641 2022] [mpm_event:notice] [pid 1:tid 140244842888008] AH00489: Apache/2.4.54 (Unix) configured -- resuming normal operations
+[Sat Dec 10 06:00:17.928774 2022] [core:notice] [pid 1:tid 140244842888008] AH00094: Command line: 'httpd -D FOREGROUND'
+[Sat Dec 10 06:35:31.067665 2022] [mpm_event:notice] [pid 1:tid 140243038014280] AH00489: Apache/2.4.54 (Unix) configured -- resuming normal operations
+[Sat Dec 10 06:35:31.067805 2022] [core:notice] [pid 1:tid 140243038014280] AH00094: Command line: 'httpd -D FOREGROUND'
+[Sat Dec 10 06:35:40.850620 2022] [proxy:error] [pid 10:tid 140243032857400] [client 172.18.0.1:32798] AH00898: DNS lookup failure for: php returned by /index.php
+[Sat Dec 10 06:40:30.306612 2022] [mpm_event:notice] [pid 1:tid 140243038014280] AH00492: caught SIGWINCH, shutting down gracefully
+[Sat Dec 10 06:44:02.017127 2022] [mpm_event:notice] [pid 1:tid 140613926378312] AH00489: Apache/2.4.54 (Unix) configured -- resuming normal operations
+[Sat Dec 10 06:44:02.017313 2022] [core:notice] [pid 1:tid 140613926378312] AH00094: Command line: 'httpd -D FOREGROUND'
+[Sat Dec 10 06:54:41.659255 2022] [mpm_event:notice] [pid 1:tid 140613926378312] AH00492: caught SIGWINCH, shutting down gracefully
+[Sat Dec 10 07:03:31.614272 2022] [mpm_event:notice] [pid 1:tid 140650958461768] AH00489: Apache/2.4.54 (Unix) configured -- resuming normal operations
+[Sat Dec 10 07:03:31.614356 2022] [core:notice] [pid 1:tid 140650958461768] AH00094: Command line: 'httpd -D FOREGROUND'
