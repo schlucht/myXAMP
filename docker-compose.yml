@@ -3,16 +3,16 @@ version: '3'
 services:
     apache:
         image: httpd:alpine
-        container_name: apache
+        container_name: apache_container
         ports:
             - 80:80
             - 443:443
         volumes:
-            - ./code:/var/www/html
+            - ./:/var/www/html
             - ./webserver/httpd.conf:/usr/local/apache2/conf/httpd.conf
             - ./data/logs:/var/log
     php:
-        container_name: php
+        container_name: php_container
         user: '1000:1000'
         build:
             context: ./webserver
@@ -20,20 +20,28 @@ services:
                 PHP_VERSION: ${PHP_VERSION:-8.1}
                 ENV: ${ENV:-production}
         volumes:
-            - ./code:/var/www/html
+            - ./:/var/www/html
             - ./webserver/php-ini-overrides.ini:/usr/local/etc/php/conf.d/extra.ini
             - ./data/logs:/var/log
     database:
-        image: mariadb:${MARIADB_VERSION:-latest}
-        container_name: mariadb
+        image: mariadb:latest
+        container_name: mariadb_container
         ports:
-            - ${DB_PUBLIC_PORT:-3306}:3306
+            - 3306:3306
         environment:
-            - MYSQL_USER=${MYSQL_USER:-dev}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD:-dev}
-            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
+            - MYSQL_USER=schlucht
+            - MYSQL_PASSWORD=schlucht
+            - MYSQL_ROOT_PASSWORD=schlucht
         volumes:
             - db:/var/lib/mysql
+    adm:
+        image: adminer
+        restart: always
+        environment:
+            ADMINER_DEFAULT_SERVER: database
+        ports:
+            - 8088:8080
+
 volumes:
     db:
 networks:
