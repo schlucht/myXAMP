@@ -5,7 +5,7 @@ services:
         image: httpd:alpine
         container_name: apache_container
         ports:
-            - 80:80
+            - 8888:80
             - 443:443
         volumes:
             - ./:/var/www/html
@@ -23,26 +23,31 @@ services:
             - ./:/var/www/html
             - ./webserver/php-ini-overrides.ini:/usr/local/etc/php/conf.d/extra.ini
             - ./data/logs:/var/log
-    database:
-        image: mariadb:latest
-        container_name: mariadb_container
-        ports:
-            - 3306:3306
-        environment:
-            - MYSQL_USER=schlucht
-            - MYSQL_PASSWORD=schlucht
-            - MYSQL_ROOT_PASSWORD=schlucht
-        volumes:
-            - db:/var/lib/mysql
-    adm:
-        image: adminer
-        restart: always
-        environment:
-            ADMINER_DEFAULT_SERVER: database
-        ports:
-            - 8088:8080
-
-volumes:
     db:
+        image: mysql:latest
+        container_name: db
+        environment:
+            MYSQL_ROOT_PASSWORD: schlucht
+            MYSQL_DATABASE: schlucht
+            MYSQL_USER: schlucht
+            MYSQL_PASSWORD: schlucht
+        ports:
+            - "3306:3306"
+        volumes:
+            - dbdata:/var/lib/mysql
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: pma
+        links:
+            - db
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
+        restart: always
+        ports:
+        - 8081:80
+volumes:
+  dbdata:
 networks:
     webserver:
